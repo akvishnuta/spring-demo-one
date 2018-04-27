@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+<context:property-placeholder location="classpath:sport.properties"/>
+<!-- bean definitions here -->
+<bean id="myFortune" class="com.luv2code.springdemo.MyHappyFortuneService"></bean>
+
+<bean id="myCoach" class="com.luv2code.springdemo.TrackCoach">
+	<constructor-arg ref="myFortune"/>
+</bean>
+
+<bean id="hisCoach" class="com.luv2code.springdemo.BaseballCoach">
+</bean>
+
+<!-- <bean id="cricketCoach" class="com.luv2code.springdemo.CricketCoach"> -->
+<!-- 	<property name="dailyFortune" ref="myFortune"/> -->
+	
+<!-- 	<property name="emailAddress" value="thebestcoach@gmail.com"/> -->
+<!-- 	<property name="team" value="Hyderabad Sunrisers"/> -->
+<!-- </bean> -->
+
+<bean id="cricketCoach" class="com.luv2code.springdemo.CricketCoach">
+	<property name="dailyFortune" ref="myFortune"/>
+	
+	<property name="emailAddress" value="${foo.email}"/>
+	<property name="team" value="${foo.team}"/>
+</bean>
+
+</beans>
